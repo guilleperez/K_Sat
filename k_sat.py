@@ -2,14 +2,14 @@
 #The comment lines are followed by the "problem" line. p, varibles - clauses
 #Clauses end with 0
 #
-def sat(entrada):
+def sat(entrada, variables):
     clausula = ""
-    dummy = 1
+    dummy = int(variables)+1
     x = 0
     y = 1
 
     if (len(entrada) == 1):
-        return entrada[0] + " " + dummy + " " + dummy-1
+        return entrada[0] + " " + dummy + " " + dummy*-1
 
     elif (len(entrada) == 2):
         return entrada[0] + " " + entrada[1] + " " + dummy
@@ -24,10 +24,10 @@ def sat(entrada):
                 clausula += entrada[0] + " "  + entrada[1] + " " + str(dummy) + "\n"
             #ultima clausula
             elif(pos_actual == len(entrada) - 2):
-                dummy -= 1
+                dummy *= -1
                 clausula += str(dummy) +" " + entrada[len(entrada)-2] + " " + entrada[len(entrada)-1]
             else:
-                 dummy -= 1
+                 dummy *= -1
                  clausula += str(dummy) + " " + entrada[pos_actual] + " "
                  dummy += 1
                  clausula += str(dummy) + '\n'
@@ -59,5 +59,5 @@ for linea in datos:
 
        print "Clausula: " + cls
 
-       clausula = sat(linea)
+       clausula = sat(linea, variables)
        print "3Sat:\n" +  clausula+ '\n'
