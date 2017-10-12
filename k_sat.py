@@ -26,13 +26,8 @@ def sat(entrada):
             elif(pos_actual == len(entrada) - 2):
                 dummy -= 1
                 clausula += str(dummy) +" " + entrada[len(entrada)-2] + " " + entrada[len(entrada)-1]
-            #clausulas 2 - n-1
             else:
                  dummy -= 1
-                # y += 1
-                # if(y%3 == 0):
-                #     y = 0
-                #     x +=1
                  clausula += str(dummy) + " " + entrada[pos_actual] + " "
                  dummy += 1
                  clausula += str(dummy) + '\n'
@@ -49,64 +44,20 @@ for linea in datos:
     split = linea.split()
     #agrega la linea del problema
     if 'p' in split:
-        #entrada.append(split)
         variables = split[2]
         total_clauses = split[3]
 
-    #linea = linea.split(
     #ignora todas las lineas de comentario, solo agrega los numeros
     elif 'c' not in split:
-       # numeros += linea
-       #print linea
-       #removes the las 0
+       #removes the last 0
        linea = linea.split()
        linea.remove('0')
-       print  linea
+
+       cls = ""
+       for i in linea:
+           cls += i + " "
+
+       print "Clausula: " + cls
 
        clausula = sat(linea)
-       print clausula + '\n'
-
-# numeros = numeros.split()
-# num = []
-# for i in numeros:
-#     #verifica que no sea sea, pertenece a la clausula
-#     if(i != '0'):
-#         num.append(i)
-#     else:
-#         #si es 0, cambia de clausula
-#         entrada.append(num)
-#         num = []
-#
-#
-#
-#
-# print "Variables", variables, "Clausulas" , total_clauses
-# entrada.remove(entrada[0])
-#
-# print entrada
-# clausula = sat(entrada,  total_clauses)
-# print clausula
-# #clauses = []
-# claus = "( "
-# for i in range(int(total_clauses)):
-#
-#     for j in range(len(entrada[i])):
-#         if(entrada[i][j] > 0 ):
-#              claus += 'x'
-#         else:
-#             claus += '-x'
-#             entrada[i][j] = int(entrada[i][j]) * -1
-#
-#         if(j != len(entrada[i]) - 1):
-#             claus += str(entrada[i][j]) + " or "
-#         else:
-#             claus += str(entrada[i][j])
-#
-#     if (i != len(entrada) - 1):
-#         claus += " or "
-#
-#
-# claus += " ) "
-#
-# print claus
-#
+       print "3Sat:\n" +  clausula+ '\n'
