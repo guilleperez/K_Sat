@@ -29,6 +29,7 @@ def sat(entrada, variables):
             else:
                  dummy *= -1
                  clausula += str(dummy) + " " + entrada[pos_actual] + " "
+                 dummy *= -1
                  dummy += 1
                  clausula += str(dummy) + '\n'
 
