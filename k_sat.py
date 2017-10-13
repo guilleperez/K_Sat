@@ -5,33 +5,31 @@
 def sat(entrada, variables):
     clausula = ""
     dummy = int(variables)+1
-    x = 0
-    y = 1
 
     if (len(entrada) == 1):
-        return entrada[0] + " " + dummy + " " + dummy*-1
+        return entrada[0] + " or " + str(dummy) + " or " + str(dummy*-1)
 
     elif (len(entrada) == 2):
-        return entrada[0] + " " + entrada[1] + " " + dummy
+        return entrada[0] + " or " + entrada[1] + " or " + str(dummy)
 
     elif(len(entrada)== 3):
-        return entrada[0] + " " + entrada[1] + " " + entrada[2]
+        return entrada[0] + " or " + entrada[1] + " or " + entrada[2]
 
     else:
         for pos_actual in range(1,len(entrada)-1):
             #primera clausula
             if(pos_actual == 1):
-                clausula += entrada[0] + " "  + entrada[1] + " " + str(dummy) + "\n"
+                clausula += "(" + entrada[0] + " or "  + entrada[1] + " or " + str(dummy) + ") and"
             #ultima clausula
             elif(pos_actual == len(entrada) - 2):
                 dummy *= -1
-                clausula += str(dummy) +" " + entrada[len(entrada)-2] + " " + entrada[len(entrada)-1]
+                clausula += " (" +  str(dummy) +" or " + entrada[len(entrada)-2] + " or " + entrada[len(entrada)-1] + ")"
             else:
                  dummy *= -1
-                 clausula += str(dummy) + " " + entrada[pos_actual] + " "
+                 clausula +=  " ("  + str(dummy) + " or " + entrada[pos_actual] + " or "
                  dummy *= -1
                  dummy += 1
-                 clausula += str(dummy) + '\n'
+                 clausula += str(dummy) + ') and'
 
     return clausula
 
@@ -61,4 +59,4 @@ for linea in datos:
        print "Clausula: " + cls
 
        clausula = sat(linea, variables)
-       print "3Sat:\n" +  clausula+ '\n'
+       print "3Sat: " +  clausula+ '\n'
